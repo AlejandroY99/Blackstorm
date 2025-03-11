@@ -1,0 +1,94 @@
+/* Fondo negro para toda la página */
+body {
+    background-color: black;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Asegura que el contenido esté centrado en toda la altura de la ventana */
+    color: white; /* Asegura que el texto sea visible sobre el fondo negro */
+    overflow: hidden; /* Evita desplazamiento cuando el contenido se desenfoque */
+}
+
+/* Estilos para el contenedor de las tarjetas */
+.cards {
+    display: flex;
+    gap: 20px;
+    justify-content: center; /* Alinea las tarjetas horizontalmente en el centro */
+    align-items: center; /* Alinea las tarjetas verticalmente en el centro */
+    position: relative;
+    z-index: 2; /* Asegura que las tarjetas se mantengan por encima del fondo */
+}
+
+/* Estilos básicos para las tarjetas */
+.card {
+    width: 200px;
+    height: 250px;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 3; /* Asegura que las tarjetas estén por encima del fondo */
+}
+
+/* Colores específicos para cada tarjeta */
+.card.red {
+    background-color: #f44336;
+    color: white;
+}
+
+.card.blue {
+    background-color: #2196F3;
+    color: white;
+}
+
+.card.green {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Efectos al pasar el mouse */
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Desenfoque del fondo */
+body.blur {
+    filter: blur(10px);
+}
+
+/* Efecto de desenfoque cuando el mouse está sobre una tarjeta */
+.cards:hover ~ body {
+    filter: blur(10px);
+}
+
+/* Cambio de color y opacidad en los textos */
+.tip {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.second-text {
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+/* Cambiar el color del texto de la segunda línea al pasar el mouse */
+.card:hover .second-text {
+    opacity: 1;
+    font-weight: bold;
+}
+
+/* Activar el fondo desenfocado solo cuando el mouse está sobre una tarjeta */
+.card:hover ~ body {
+    filter: blur(10px);
+}
+

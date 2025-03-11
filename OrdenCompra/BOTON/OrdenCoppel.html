@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Orden de Compra</title>
+    <link rel="stylesheet" href="diseño.css">
+    <style>
+        .notification {
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+        .success {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .error {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Formulario de Orden de Compra</h1>
+        <form id="orderForm" action="#" method="POST">
+            <div class="form-group">
+                <label for="ordenCompra">Orden de Compra:</label>
+                <input type="text" id="ordenCompra" name="ordenCompra" required>
+            </div>
+            <div class="form-group">
+                <label for="seccion">Sección:</label>
+                <input type="text" id="seccion" name="seccion">
+            </div>
+            <div class="form-group">
+                <label for="modelo">Modelo:</label>
+                <input type="text" id="modelo" name="modelo" required>
+            </div>
+            <div class="form-group">
+                <label for="descripcion">Descripción:</label>
+                <input type="text" id="descripcion" name="descripcion" required>
+            </div>
+            <div class="form-group">
+                <label for="fechaInicio">Fecha Inicio de Vigencia:</label>
+                <input type="date" id="fechaInicio" name="fechaInicio" required>
+            </div>
+            <div class="form-group">
+                <label for="fechaCancelacion">Fecha de Cancelación:</label>
+                <input type="date" id="fechaCancelacion" name="fechaCancelacion" required>
+            </div>
+            <div class="form-group">
+                <label for="piezas"># de Piezas:</label>
+                <input type="number" id="piezas" name="piezas" required>
+            </div>
+            <div class="form-group">
+                <label for="montoPedido">Monto de Pedido:</label>
+                <input type="number" id="montoPedido" name="montoPedido" required>
+            </div>
+            <div class="form-group">
+                <label for="cantidadEntregada">Cantidad Entregada:</label>
+                <input type="number" id="cantidadEntregada" name="cantidadEntregada">
+            </div>
+            <div class="form-group">
+                <label for="cantidadFaltante">Cantidad Faltante:</label>
+                <input type="number" id="cantidadFaltante" name="cantidadFaltante">
+            </div>
+            <div class="form-group">
+                <label for="id">ID:</label>
+                <input type="text" id="id" name="id" required>
+            </div>
+            <div class="form-group">
+                <label for="proveedor">Proveedor:</label>
+                <input type="text" id="proveedor" name="proveedor" required>
+            </div>
+            <div class="form-group">
+                <label for="estatus">Estatus:</label>
+                <input type="text" id="estatus" name="estatus">
+            </div>
+            <div class="form-group">
+                <label for="fechaCitar">Fecha a Citar:</label>
+                <input type="date" id="fechaCitar" name="fechaCitar">
+            </div>
+            <div class="form-group">
+                <label for="fechaCita">Fecha Cita:</label>
+                <input type="date" id="fechaCita" name="fechaCita">
+            </div>
+            <div class="form-group">
+                <label for="numCita"># de Cita:</label>
+                <input type="text" id="numCita" name="numCita">
+            </div>
+            <div class="form-group">
+                <label for="horaCita">Hora Cita:</label>
+                <input type="time" id="horaCita" name="horaCita">
+            </div>
+            <div class="form-group">
+                <button type="submit">Enviar</button>
+            </div>
+        </form>
+
+        <div id="notification" class="notification"></div>
+    </div>
+
+    <script>
+        document.getElementById('orderForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevenir el envío del formulario para validar
+
+            const requiredFields = [
+                'ordenCompra', 'modelo', 'descripcion', 'fechaInicio', 'fechaCancelacion',
+                'piezas', 'montoPedido', 'id', 'proveedor'
+            ];
+
+            let missingFields = [];
+            
+            // Validar los campos requeridos
+            requiredFields.forEach(function(fieldId) {
+                const field = document.getElementById(fieldId);
+                if (!field.value) {
+                    missingFields.push(fieldId);
+                }
+            });
+
+            // Mostrar notificación dependiendo de si falta algún campo o si todo está completo
+            const notification = document.getElementById('notification');
+            if (missingFields.length > 0) {
+                notification.classList.remove('success');
+                notification.classList.add('error');
+                notification.style.display = 'block';
+                notification.innerHTML = `Error: Faltan los siguientes campos: ${missingFields.join(', ')}`;
+            } else {
+                notification.classList.remove('error');
+                notification.classList.add('success');
+                notification.style.display = 'block';
+                notification.innerHTML = 'Formulario enviado con éxito!';
+                // Aquí puedes agregar el código para enviar el formulario, si es necesario
+                setTimeout(() => {
+                    // Limpiar el formulario
+                    document.getElementById('orderForm').reset();
+                    notification.style.display = 'none';
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
